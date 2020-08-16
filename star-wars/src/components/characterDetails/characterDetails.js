@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import s from './personDetails.css';
+import s from './characterDetails.css';
 
-export default class PersonDetails extends Component{
+export default class CharacterDetails extends Component{
 
     render(){
         return(

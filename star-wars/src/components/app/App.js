@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import s from './App.css'
+import Header from '../header/header';
+import RandomPlanet from '../randomPlanet/randomPlanet';
+import ItemList from '../itemList/randomList';
+import PersonalDetails from '../personalDetailes/personalDetails';
 
 export default class App extends Component {
 
@@ -7,14 +11,19 @@ export default class App extends Component {
         return (
 
             <div className="container">
-                <h1>hello pidr</h1>
-                <ul>
-                    <li>syka</li>
-                    <li>bl9</li>
-                    <li>noyt</li>
-                    <li>ne </li>
-                    <li>nyzno</li>
-                </ul>
+                <Header />
+                <RandomPlanet />
+                <div className="randomListWrapper">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <ItemList />
+                        </div>
+                        <div className="col-md-6">
+                            <PersonalDetails />
+                        </div>
+                    </div>
+                </div>
+
             </div>
         )
     }
