@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import s from './randomPlanet.css';
 import SwapiServices from './../swapiService/swapiService'
 import Spinner from '../spinner/spinner';
+import OnError from '../onError/onError';
 
 export default class RandomPlanet extends Component {
     
@@ -13,7 +14,8 @@ export default class RandomPlanet extends Component {
     
     state = {
         planet:{},
-        loading: true, 
+        loading: true,
+        error: false, 
     }
     randomID = Math.floor(Math.random() * 20 + 1);
     swapi = new SwapiServices();
@@ -23,19 +25,28 @@ export default class RandomPlanet extends Component {
         this.setState({ planet, loading: false });
     }
 
+    onError = (err) =>{
+        console.error(err);
+        this.setState({
+            error: true,
+            loading: false,
+        })
+    }
+
     updateState() {
         
-        this.swapi.getPlanet(this.randomID)
+            this.swapi.getPlanet(this.randomID)
             .then(this.onPlanetLoaded)
-            
+            .catch(this.onError)
     }
 
     
     render() {
 
-        const { planet, loading } = this.state;
+        const { planet, loading, error } = this.state;
         const spinner = loading ?  <Spinner/> : null;
-        const terra = !loading ? <Planet planet = {planet}/> : null;
+        const terra = (!loading && !error) ? <Planet planet = {planet}/> : null;
+        const onError = error ? <OnError /> : null;
         return (
 
             <div className='planetWrapper'>
@@ -43,7 +54,7 @@ export default class RandomPlanet extends Component {
                 
                     { spinner }
                     { terra }
-
+                    {onError}
                 </div>
             </div>
         )
