@@ -6,6 +6,9 @@
 .random_image{
     display: block;
 }
+.random_image img{
+    width: 150px;
+}
 .randomInfo{
     padding: 0px 15px;
     

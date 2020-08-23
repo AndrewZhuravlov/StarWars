@@ -10,13 +10,13 @@ export default class App extends Component {
         selectedPersonId: 1,
     }
     onPersonClick = (id)=>{
-
+        console.log(id);
         this.setState({
             selectedPersonId: id,
         })
     }
     render() {
-        const {selectedPersonId}=this.state;
+        const {selectedPersonId}= this.state;
         return (
             <div className="container">
                 <Header />
@@ -27,7 +27,8 @@ export default class App extends Component {
                             <ItemList onPersonClick ={this.onPersonClick} />
                         </div>
                         <div className="col-md-6">
-                            <PersonalDetails selectedPersonId ={selectedPersonId}  />
+                            <PersonalDetails 
+                            selectedPersonId ={selectedPersonId}  />
                         </div>
                     </div>
                 </div>
