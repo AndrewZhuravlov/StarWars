@@ -7,21 +7,22 @@ import OnError from '../onError/onError';
 
 export default class RandomPlanet extends Component {
     
-    constructor(){
-        super();
-        this.updateState();
-    }
     
     state = {
         planet:{},
         loading: true,
         error: false, 
     }
-    randomID = Math.floor(Math.random() * 20 + 1);
+
+    componentDidMount(){
+        this.updatePlanet();
+        this.interval = setInterval(this.updatePlanet,10000);
+       
+    }
+    
     swapi = new SwapiServices();
     
     onPlanetLoaded = (planet) => {
-
         this.setState({ planet, loading: false });
     }
 
@@ -33,9 +34,9 @@ export default class RandomPlanet extends Component {
         })
     }
 
-    updateState() {
-        
-            this.swapi.getPlanet(this.randomID)
+    updatePlanet = () => {
+            const randomID = Math.floor(Math.random() * 20 + 1);
+            this.swapi.getPlanet(randomID)
             .then(this.onPlanetLoaded)
             .catch(this.onError)
     }

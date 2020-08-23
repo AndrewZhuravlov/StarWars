@@ -5,8 +5,8 @@ export default class SwapiServices {
     async getDataFromSwapi(url) {
         try {
             const resolve = await fetch(`${this._apiBase}${url}`);
-            const data = await resolve.json();
-            return data;
+            return await resolve.json();
+            
         } catch (err) {
             console.error(err);
         }
@@ -16,7 +16,7 @@ export default class SwapiServices {
     async getAllPeople (){
         
         const res = await this.getDataFromSwapi(`/people/`);
-        return res.results.map(this._peopleTransformator)
+        return await res.results.map(this._peopleTransformator)
     }
     async getPerson (id){
 
@@ -31,7 +31,6 @@ export default class SwapiServices {
         
     }
     async getPlanet (id){
-
         const planet = await this.getDataFromSwapi(`/planets/${id}`);
         return this._planetTransformation(planet);
 
@@ -56,7 +55,7 @@ export default class SwapiServices {
         return id;
     }
 
-    _planetTransformation(planet){
+    _planetTransformation = (planet)=>{
         const id = this.idRegExpFinder(planet);
         return {
             id,
@@ -67,18 +66,18 @@ export default class SwapiServices {
         }
     }
 
-    _peopleTransformator(person){
+    _peopleTransformator=(person)=>{
 
         return{
             id: this.idRegExpFinder(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor,
+            birthYear: person.birth_year,
+            eyeColor: person.eye_color,
         }
     }
 
-    _transformStarships(starship){
+    _transformStarships=(starship)=>{
 
         return{
             id: this.idRegExpFinder(starship),
