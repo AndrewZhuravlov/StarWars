@@ -10,7 +10,6 @@ export default class App extends Component {
         selectedPersonId: 1,
     }
     onPersonClick = (id)=>{
-        console.log(id);
         this.setState({
             selectedPersonId: id,
         })

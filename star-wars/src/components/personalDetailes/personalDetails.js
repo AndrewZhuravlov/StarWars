@@ -9,17 +9,17 @@ export default class PersonalDetails extends Component {
     state ={
         person: null,
         onError: false,
+        loading : true,
     }
     swapi = new SwapiServices();
     componentDidMount(){
+        
         const {selectedPersonId} = this.props;
-        if(!selectedPersonId){
-            this.onErr();
-        }
         this.swapi.getPerson(selectedPersonId)
         .then(person => {
             this.setState({
                 person,
+                loading: false
             })
         })
         .catch(this.onErr);
@@ -30,13 +30,24 @@ export default class PersonalDetails extends Component {
             onError: true,
         })
     }
+    componentDidUpdate(prevProps){
+        if(this.props.selectedPersonId !== prevProps.selectedPersonId){
+            
+            this.setState({
+                loading: true,
+            })
+            this.componentDidMount();
+        }
+    }
     render() {
-        const {person, onError } =this.state;
-        const err = onError ? <OnError/> : null;
-        console.log(person);
-        if(!person){
+        const {person, onError, loading } =this.state;
+        if(loading){
             return <Spinner/>
         }
+        if(!person || onError ){
+            return <OnError/>
+        }
+        
         const { name, gender, birthYear, eyeColor, id} = person;
         return (
             <div>
