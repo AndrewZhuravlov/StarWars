@@ -42,15 +42,27 @@ export default class PersonalDetails extends Component {
     }
     render() {
         const {person, onError, loading } =this.state;
+
         if(loading){
             return <Spinner/>
         }
         if(!person || onError ){
             return <OnError/>
         }
-        
-        const { name, gender, birthYear, eyeColor, id} = person;
+       
         return (
+            <PersonDescription person ={person}/>
+        )
+    }
+}
+
+
+
+class PersonDescription extends Component{
+
+    render(){
+        const { name, gender, birthYear, eyeColor, id} = this.props.person;
+        return(
             <div>
                 <div className="randomDescription d-flex" >
                     <div className="randomPhoto">
