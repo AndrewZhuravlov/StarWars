@@ -3,6 +3,7 @@ import { s } from "./personalDetails.css";
 import SwapiServices from "../swapiService/swapiService";
 import OnError from "../onError/onError";
 import Spinner from "../spinner/spinner";
+import ThrowErr from "../throwErr/throwErr";
 
 export default class PersonalDetails extends Component {
     
@@ -32,7 +33,7 @@ export default class PersonalDetails extends Component {
     }
     componentDidUpdate(prevProps){
         if(this.props.selectedPersonId !== prevProps.selectedPersonId){
-            
+
             this.setState({
                 loading: true,
             })
@@ -70,6 +71,7 @@ export default class PersonalDetails extends Component {
                                 <span>{eyeColor}</span>
                             </div>
                         </div>
+                       <ThrowErr/>
                     </div>
                 </div>
             </div>
