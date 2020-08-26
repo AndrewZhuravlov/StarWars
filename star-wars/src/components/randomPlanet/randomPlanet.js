@@ -33,13 +33,9 @@ export default class RandomPlanet extends Component {
             loading: false,
         })
     }
-<<<<<<< HEAD
     componentWillUnmount(){
         clearInterval(this.interval);
     }
-=======
-
->>>>>>> 88501453bbbc757203b2c1822e58cb04a4e49ccd
     updatePlanet = () => {
             const randomID = Math.floor(Math.random() * 20 + 1);
             this.swapi.getPlanet(randomID)
