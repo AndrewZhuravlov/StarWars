@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemList from '../itemList/randomList';
-import PersonalDetails from '../personalDetailes/personalDetails';
+import PersonalDetails from './personalDetailes/personalDetails';
 import OnError from '../onError/onError';
 export default class PersonPage extends Component {
 

@@ -1,9 +1,9 @@
 import  React, { Component } from "react";
 import { s } from "./personalDetails.css";
-import SwapiServices from "../swapiService/swapiService";
-import OnError from "../onError/onError";
-import Spinner from "../spinner/spinner";
-import ThrowErr from "../throwErr/throwErr";
+import SwapiServices from "../../swapiService/swapiService";
+import Spinner from "../../spinner/spinner";
+import ThrowErr from "../../throwErr/throwErr";
+import OnError from "../../onError/onError";
 
 export default class PersonalDetails extends Component {
     
