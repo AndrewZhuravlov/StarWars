@@ -68,10 +68,10 @@ const Planet = ({ planet }) =>{
 const { name, population, rotationPeriod, diameter, id } = planet;
     return (
         <React.Fragment>
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                         <a className='planet_image' href='#'><img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt="planet-picture" /></a>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <div className="planetInfo">
                             <div className="planetName">
                                 <span>{name}</span>
@@ -89,7 +89,7 @@ const { name, population, rotationPeriod, diameter, id } = planet;
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
 
                     </div>
         </React.Fragment>
