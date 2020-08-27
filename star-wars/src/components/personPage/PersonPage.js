@@ -20,7 +20,10 @@ export default class PersonPage extends Component {
         return (
             <React.Fragment>
                 <div className="col-md-6">
-                    <ItemList onPersonClick={onPersonClick} />
+                    <ItemList
+                    renderItems = { (item)=> (`${item.name} (${item.gender})`)}
+                    getData ={ this.props.getData } 
+                    onPersonClick={onPersonClick} />
                 </div>
                 <div className="col-md-6">
                     <PersonalDetails
