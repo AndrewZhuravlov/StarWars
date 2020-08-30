@@ -6,12 +6,13 @@ import PersonPage from '../personPage/PersonPage';
 import ItemList from '../itemList/randomList';
 import PersonalDetails from '../personPage/personalDetailes/personalDetails';
 import SwapiServices from '../swapiService/swapiService';
+import Row from '../Row/Row';
 
 
 export default class App extends Component {
     swapi = new SwapiServices();
     state = {
-        selectedPersonId: 1,
+        selectedPersonId: 2,
     }
 
     
@@ -21,7 +22,7 @@ export default class App extends Component {
         })
     }
 
-
+    
     render() {
        
         const { selectedPersonId } = this.state;
@@ -30,13 +31,27 @@ export default class App extends Component {
                 <Header />
                 <RandomPlanet />
                 <div className="randomListWrapper">
-                    <div className="row">
+                    <Row
+                        left = {<PersonalDetails
+                            getData = {this.swapi.getPerson}
+                            selectedPersonId={10}
+                            getImage = {this.swapi.imagePersonDownloader}
+                           
+                            />}
+                        right={
+                            <PersonalDetails
+                                    getData = {this.swapi.getPlanet}
+                                    selectedPersonId={4}
+                                    getImage = {this.swapi.imagePlanetDownloader}
+                                    />
+                        }    />
+                   {/*  <div className="row">
                         <PersonPage
-                            getData ={this.swapi.getAllPeople}
+                            getData ={this.swapi}
                             selectedPersonId={selectedPersonId}
                             onPersonClick={this.onPersonClick} />
-                    </div>
-                    <div className="row">
+                    </div> */}
+                    {/* <div className="row">
                         <React.Fragment>
                             <div className="col-md-6">
                                 <ItemList
@@ -46,7 +61,9 @@ export default class App extends Component {
                             </div>
                             <div className="col-md-6">
                                 <PersonalDetails
+                                    getData = {this.swapi.getPlanet}
                                     selectedPersonId={selectedPersonId}
+                                    getImage = {this.swapi.imagePlanetDownloader}
                                     />
                             </div>
                         </React.Fragment>
@@ -61,10 +78,12 @@ export default class App extends Component {
                             </div>
                             <div className="col-md-6">
                                 <PersonalDetails
-                                    selectedPersonId={selectedPersonId} />
+                                    getData = {this.swapi.getStarship}
+                                    selectedPersonId={selectedPersonId}
+                                    getImage = {this.swapi.imageStarshipDownloader} />
                             </div>
                         </React.Fragment>
-                    </div>
+                    </div> */}
                 </div>
 
             </div>

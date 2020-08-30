@@ -8,19 +8,22 @@ import OnError from "../../onError/onError";
 export default class PersonalDetails extends Component {
     
     state ={
-        person: null,
+        item: null,
         onError: false,
         loading : true,
+        imgUrl: null,
     }
-    swapi = new SwapiServices();
+    
     componentDidMount(){
         
-        const {selectedPersonId} = this.props;
-        this.swapi.getPerson(selectedPersonId)
-        .then(person => {
+        const {selectedPersonId, getData, getImage} = this.props;
+        getData(selectedPersonId)
+        .then(item => {
+            
             this.setState({
-                person,
-                loading: false
+                item,
+                loading: false,
+                imgUrl: getImage(selectedPersonId)
             })
         })
         .catch(this.onErr);
@@ -41,17 +44,18 @@ export default class PersonalDetails extends Component {
         }
     }
     render() {
-        const {person, onError, loading } =this.state;
+        const {item, onError, loading, imgUrl } =this.state;
 
         if(loading){
             return <Spinner/>
         }
-        if(!person || onError ){
+        if(!item || onError ){
             return <OnError/>
         }
        
         return (
-            <PersonDescription person ={person}/>
+            <PersonDescription imgUrl ={imgUrl}
+                               item ={item}/>
         )
     }
 }
@@ -61,12 +65,15 @@ export default class PersonalDetails extends Component {
 class PersonDescription extends Component{
 
     render(){
-        const { name, gender, birthYear, eyeColor, id} = this.props.person;
+       
+        console.log(this.props.item);
+        const { name, gender, birthYear, eyeColor} = this.props.item;
+        
         return(
             <div>
                 <div className="randomDescription d-flex" >
                     <div className="randomPhoto">
-                        <a className='random_image' ><img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt="" /></a>
+                        <a className='random_image' ><img src={this.props.imgUrl} alt="" /></a>
                     </div>
                     <div className="randomInfo">
                         <div className="randomName">

@@ -11,13 +11,15 @@ export default class PersonPage extends Component {
     
 
     render() {
-        const {selectedPersonId, onPersonClick } = this.props;
+        const {selectedPersonId, onPersonClick, getData } = this.props;
         const itemList = (<ItemList
             renderItems = { (item)=> (`${item.name} (${item.gender})`)}
-            getData = { this.props.getData } 
+            getData = { getData.getAllPeople } 
             onPersonClick = { onPersonClick } />);
 
         const personalDetails = ( <PersonalDetails
+            getData ={getData.getPerson}
+            getImage = {getData.imagePersonDownloader}
             selectedPersonId={selectedPersonId} />);    
       
         return (
