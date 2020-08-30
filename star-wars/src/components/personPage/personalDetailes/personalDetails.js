@@ -1,4 +1,4 @@
-import  React, { Component } from "react";
+import React, { Component } from "react";
 import { s } from "./personalDetails.css";
 import SwapiServices from "../../swapiService/swapiService";
 import Spinner from "../../spinner/spinner";
@@ -6,36 +6,36 @@ import ThrowErr from "../../throwErr/throwErr";
 import OnError from "../../onError/onError";
 
 export default class PersonalDetails extends Component {
-    
-    state ={
+
+    state = {
         item: null,
         onError: false,
-        loading : true,
+        loading: true,
         imgUrl: null,
     }
-    
-    componentDidMount(){
-        
-        const {selectedPersonId, getData, getImage} = this.props;
+
+    componentDidMount() {
+
+        const { selectedPersonId, getData, getImage } = this.props;
         getData(selectedPersonId)
-        .then(item => {
-            
-            this.setState({
-                item,
-                loading: false,
-                imgUrl: getImage(selectedPersonId)
+            .then(item => {
+
+                this.setState({
+                    item,
+                    loading: false,
+                    imgUrl: getImage(selectedPersonId)
+                })
             })
-        })
-        .catch(this.onErr);
+            .catch(this.onErr);
     }
-   
+
     onErr = () => {
         this.setState({
             onError: true,
         })
     }
-    componentDidUpdate(prevProps){
-        if(this.props.selectedPersonId !== prevProps.selectedPersonId){
+    componentDidUpdate(prevProps) {
+        if (this.props.selectedPersonId !== prevProps.selectedPersonId) {
 
             this.setState({
                 loading: true,
@@ -44,32 +44,40 @@ export default class PersonalDetails extends Component {
         }
     }
     render() {
-        const {item, onError, loading, imgUrl } =this.state;
+        const { item, onError, loading, imgUrl } = this.state;
 
-        if(loading){
-            return <Spinner/>
+        if (loading) {
+            return <Spinner />
         }
-        if(!item || onError ){
-            return <OnError/>
+        if (!item || onError) {
+            return <OnError />
         }
-       
+
         return (
-            <PersonDescription imgUrl ={imgUrl}
-                               item ={item}/>
+            <PersonDescription imgUrl={imgUrl}
+                item={item} />
         )
     }
 }
 
 
 
-class PersonDescription extends Component{
+class PersonDescription extends Component {
 
-    render(){
-       
-        console.log(this.props.item);
-        const { name, gender, birthYear, eyeColor} = this.props.item;
+    render() {
+
+        const itemsArray = Object.entries(this.props.item);
+        const renderItems = itemsArray.map(([key, value], idx) => {
+            if( key==='id' ) return;
+            return(   
+            <div key = {idx} className="randomDescriptionItem">
+                <span>{key}: </span><span>{value}</span>
+            </div>)
+        });
         
-        return(
+        const { name } = this.props.item;
+
+        return (
             <div>
                 <div className="randomDescription d-flex" >
                     <div className="randomPhoto">
@@ -80,17 +88,9 @@ class PersonDescription extends Component{
                             <span>{name}</span>
                         </div>
                         <div>
-                            <div className="randomDescriptionItem">
-                                <span>{gender}</span>
-                            </div>
-                            <div className="randomDescriptionItem">
-                                <span>{birthYear}</span>
-                            </div>
-                            <div className="randomDescriptionItem">
-                                <span>{eyeColor}</span>
-                            </div>
+                            {renderItems}
                         </div>
-                       <ThrowErr/>
+                        <ThrowErr />
                     </div>
                 </div>
             </div>

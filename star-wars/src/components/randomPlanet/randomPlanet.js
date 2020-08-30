@@ -65,7 +65,7 @@ export default class RandomPlanet extends Component {
 }
 
 const Planet = ({ planet }) =>{
-const { name, population, rotationPeriod, diameter, id } = planet;
+const { Name, Population, RotationPeriod, Diameter, id } = planet;
     return (
         <React.Fragment>
                     <div className="col-md-4">
@@ -74,17 +74,17 @@ const { name, population, rotationPeriod, diameter, id } = planet;
                     <div className="col-md-3">
                         <div className="planetInfo">
                             <div className="planetName">
-                                <span>{name}</span>
+                                <span>{Name}</span>
                             </div>
                             <div className="planetDescription">
                                 <div className="planetDescriptionItem">
-                                    <span>Population: </span><span>{population}</span>
+                                    <span>Population: </span><span>{Population}</span>
                                 </div>
                                 <div className="planetDescriptionItem">
-                                    <span>Rotation period: </span><span>{rotationPeriod}</span>
+                                    <span>Rotation period: </span><span>{RotationPeriod}</span>
                                 </div>
                                 <div className="planetDescriptionItem">
-                                    <span>Diameter: </span><span>{diameter}</span>
+                                    <span>Diameter: </span><span>{Diameter}</span>
                                 </div>
                             </div>
                         </div>

@@ -44,7 +44,7 @@ export default class SwapiServices {
         
     }
     getStarship= async (id) => {
-
+        
         const starship = await this.getDataFromSwapi(`/starships/${id}`);
         return this._transformStarships(starship);
     }
@@ -60,10 +60,10 @@ export default class SwapiServices {
         const id = this.idRegExpFinder(planet);
         return {
             id,
-            name: planet.name,
-            population: planet.population,
-            rotationPeriod: planet.rotation_period,
-            diameter: planet.diameter,
+            ['Name']: planet.name,
+            ['Population']: planet.population,
+            ['RotationPeriod']: planet.rotation_period,
+            ['Diameter']: planet.diameter,
         }
     }
 
@@ -71,10 +71,10 @@ export default class SwapiServices {
 
         return{
             id: this.idRegExpFinder(person),
-            name: person.name,
-            gender: person.gender,
-            birthYear: person.birth_year,
-            eyeColor: person.eye_color,
+            ['Name']: person.name,
+            ['Gender']: person.gender,
+            ['Birth year']: person.birth_year,
+            ['Eye color']: person.eye_color,
         }
     }
 
@@ -82,13 +82,13 @@ export default class SwapiServices {
 
         return{
             id: this.idRegExpFinder(starship),
-            name: starship.name,
-            model: starship.model,
-            manufacturer: starship.manufacturer,
-            costInCredits: starship.costInCredits,
-            length: starship.length,
-            passengers: starship.passengers,
-            cargoCapacity: starship.cargoCapacity 
+            ['Name']: starship.name,
+            ['Model']: starship.model,
+            ['Manufacturer']: starship.manufacturer,
+            ['Cost In Credits']: starship.costInCredits,
+            ['Length']: starship.length,
+            ['Passengers']: starship.passengers,
+            ['Cargo Capacity']: starship.cargoCapacity 
         }
     }
 
@@ -103,7 +103,9 @@ export default class SwapiServices {
     }
 
     imageStarshipDownloader =(id) =>{
-        console.log(id);
+        if(id===2){
+            return 'https://lh3.googleusercontent.com/proxy/3X7ow3VSiMjyBRvKHooXiqe46IMYXMPMGeoiTP2npCHOPEaDYxhIXtP5pVHi1pl2nGsDkdt4N4WOuCnFnHiJLB3L56PbGwBMafvDtc0uEsMsyHJALA'
+        }
         return `${this._imgBase}/starships/${id}.jpg`
          
     }

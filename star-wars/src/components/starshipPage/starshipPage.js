@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Row from '../Row/Row';
-import PersonalDetails from '../personPage/personalDetailes/personalDetails';
 import ItemList from '../itemList/randomList';
+import PersonalDetails from '../personPage/personalDetailes/personalDetails';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
-export default class PlanetPage extends Component {
 
-    render() {
+export default class StarshipPage extends Component{
+
+    render(){
         const{getData, selectedPersonId, onPersonClick} =this.props;
         const items = (
             <ItemList
                     renderItems = { (item)=> (`${item.Name}`)}
-                    getData={getData.getAllPlanets}
+                    getData={getData.getAllStarships}
                     selectedPersonId={selectedPersonId}
                     onPersonClick={onPersonClick}
                 />
@@ -18,9 +19,9 @@ export default class PlanetPage extends Component {
 
         const details = (
             <PersonalDetails
-                        getData={getData.getPlanet}
+                        getData={getData.getStarship}
                         selectedPersonId={selectedPersonId}
-                        getImage={getData.imagePlanetDownloader}
+                        getImage={getData.imageStarshipDownloader}
                     />
         )
         return (

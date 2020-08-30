@@ -9,7 +9,6 @@ export default class RandomList extends Component {
         itemList: null,
         onError: false,
     }
-    swapi = new SwapiServices();
     componentDidMount(){
 
         this.props.getData()
