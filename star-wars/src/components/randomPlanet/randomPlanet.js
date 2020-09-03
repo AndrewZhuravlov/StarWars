@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import React, { Component } from 'react';
 import s from './randomPlanet.css';
 import SwapiServices from './../swapiService/swapiService'
@@ -11,7 +11,8 @@ export default class RandomPlanet extends Component {
     state = {
         planet:{},
         loading: true,
-        error: false, 
+        error: false,
+        imgUrl: null, 
     }
 
     componentDidMount(){
@@ -23,8 +24,11 @@ export default class RandomPlanet extends Component {
     swapi = new SwapiServices();
     
     onPlanetLoaded = (planet) => {
-        this.setState({ planet, loading: false });
-    }
+        this.setState({ 
+            planet, 
+            loading: false,
+             });
+    };
 
     onError = (err) =>{
         console.error(err);
@@ -32,23 +36,31 @@ export default class RandomPlanet extends Component {
             error: true,
             loading: false,
         })
-    }
+    };
+
     componentWillUnmount(){
         clearInterval(this.interval);
-    }
+    };
+
     updatePlanet = () => {
-            const randomID = Math.floor(Math.random() * 20 + 1);
+            const randomID = Math.floor(Math.random() * 19 + 1 );
             this.swapi.getPlanet(randomID)
             .then(this.onPlanetLoaded)
             .catch(this.onError)
-    }
+            this.updateImage(randomID);
+    };
 
+    updateImage =(id) => {
+        this.setState({
+            imgUrl: this.swapi.imagePlanetDownloader(id),
+        })
+    }
     
     render() {
 
-        const { planet, loading, error } = this.state;
+        const { planet, loading, error, imgUrl } = this.state;
         const spinner = loading ?  <Spinner/> : null;
-        const terra = (!loading && !error) ? <Planet planet = {planet}/> : null;
+        const terra = (!loading && !error) ? <Planet imgUrl = { imgUrl } planet = {planet}/> : null;
         const onError = error ? <OnError /> : null;
         return (
 
@@ -58,18 +70,20 @@ export default class RandomPlanet extends Component {
                     { spinner }
                     { terra }
                     {onError}
+
                 </div>
             </div>
         )
     }
 }
 
-const Planet = ({ planet }) =>{
-const { Name, Population, RotationPeriod, Diameter, id } = planet;
+const Planet = ( props ) => {
+const { Name, Population, RotationPeriod, Diameter, id } = props.planet;
+const { imgUrl } = props;
     return (
         <React.Fragment>
                     <div className="col-md-4">
-                        <a className='planet_image' href='#'><img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt="planet-picture" /></a>
+                        <a className='planet_image' href='#'><img src={ imgUrl }  alt="planet-picture" /></a>
                     </div>
                     <div className="col-md-3">
                         <div className="planetInfo">

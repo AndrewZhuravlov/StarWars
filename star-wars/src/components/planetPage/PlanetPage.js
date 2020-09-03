@@ -6,20 +6,20 @@ import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 export default class PlanetPage extends Component {
 
     render() {
-        const{getData, selectedPersonId, onPersonClick} =this.props;
+        const{getData, selectedPersonalId, onPersonalClick} =this.props;
         const items = (
             <ItemList
                     renderItems = { (item)=> (`${item.Name}`)}
                     getData={getData.getAllPlanets}
-                    selectedPersonId={selectedPersonId}
-                    onPersonClick={onPersonClick}
+                    selectedPersonalId={selectedPersonalId}
+                    onPersonalClick={onPersonalClick}
                 />
         )
 
         const details = (
             <PersonalDetails
                         getData={getData.getPlanet}
-                        selectedPersonId={selectedPersonId}
+                        selectedPersonalId={selectedPersonalId}
                         getImage={getData.imagePlanetDownloader}
                     />
         )

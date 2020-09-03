@@ -3,10 +3,7 @@ import s from './App.css'
 import Header from '../header/header';
 import RandomPlanet from '../randomPlanet/randomPlanet';
 import PersonPage from '../personPage/PersonPage';
-import ItemList from '../itemList/randomList';
-import PersonalDetails from '../personPage/personalDetailes/personalDetails';
 import SwapiServices from '../swapiService/swapiService';
-import Row from '../Row/Row';
 import PlanetPage from '../planetPage/PlanetPage';
 import StarshipPage from '../starshipPage/starshipPage';
 
@@ -14,7 +11,9 @@ import StarshipPage from '../starshipPage/starshipPage';
 export default class App extends Component {
     swapi = new SwapiServices();
     state = {
-        selectedPersonId: 2,
+        selectedPersonId: 1,
+        selectedPlanetId: 1,
+        selectedStarshipId: 2,
     }
 
 
@@ -22,12 +21,24 @@ export default class App extends Component {
         this.setState({
             selectedPersonId: id,
         })
-    }
+    };
 
+    onPlanetClick = (id) => {
+        this.setState({
+            selectedPlanetId: id,
+        })
+    };
+
+    onStarshipClick = (id) => {
+        this.setState({
+            selectedStarshipId: id,
+        })
+    };
 
     render() {
 
-        const { selectedPersonId } = this.state;
+        const { selectedPersonId, selectedPlanetId,
+            selectedStarshipId } = this.state;
         return (
             <div className="container">
                 <Header />
@@ -35,18 +46,18 @@ export default class App extends Component {
                 <div className="randomListWrapper">
                     <PersonPage
                         getData={this.swapi}
-                        selectedPersonId={selectedPersonId}
-                        onPersonClick={this.onPersonClick} />
+                        selectedPersonalId={selectedPersonId}
+                        onPersonalClick={this.onPersonClick} />
 
                     <PlanetPage
                         getData={this.swapi}
-                        selectedPersonId={selectedPersonId}
-                        onPersonClick={this.onPersonClick}
+                        selectedPersonalId={selectedPlanetId}
+                        onPersonalClick={this.onPlanetClick}
                     />
                     <StarshipPage
                         getData={this.swapi}
-                        selectedPersonId={selectedPersonId}
-                        onPersonClick={this.onPersonClick} />
+                        selectedPersonalId={selectedStarshipId}
+                        onPersonalClick={this.onStarshipClick} />
                 </div>
 
             </div>

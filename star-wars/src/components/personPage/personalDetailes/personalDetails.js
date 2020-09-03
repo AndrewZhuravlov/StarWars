@@ -16,14 +16,14 @@ export default class PersonalDetails extends Component {
 
     componentDidMount() {
 
-        const { selectedPersonId, getData, getImage } = this.props;
-        getData(selectedPersonId)
+        const { selectedPersonalId, getData, getImage } = this.props;
+        getData(selectedPersonalId)
             .then(item => {
 
                 this.setState({
                     item,
                     loading: false,
-                    imgUrl: getImage(selectedPersonId)
+                    imgUrl: getImage(selectedPersonalId)
                 })
             })
             .catch(this.onErr);
@@ -35,7 +35,7 @@ export default class PersonalDetails extends Component {
         })
     }
     componentDidUpdate(prevProps) {
-        if (this.props.selectedPersonId !== prevProps.selectedPersonId) {
+        if (this.props.selectedPersonalId !== prevProps.selectedPersonalId) {
 
             this.setState({
                 loading: true,
@@ -68,7 +68,7 @@ class PersonDescription extends Component {
 
         const itemsArray = Object.entries(this.props.item);
         const renderItems = itemsArray.map(([key, value], idx) => {
-            if( key==='id' ) return;
+            if( key ==='id' ) return;
             return(   
             <div key = {idx} className="randomDescriptionItem">
                 <span>{key}: </span><span>{value}</span>

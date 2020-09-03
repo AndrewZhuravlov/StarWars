@@ -7,20 +7,19 @@ import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 export default class StarshipPage extends Component{
 
     render(){
-        const{getData, selectedPersonId, onPersonClick} =this.props;
+        const{getData, selectedPersonalId, onPersonalClick} =this.props;
         const items = (
             <ItemList
                     renderItems = { (item)=> (`${item.Name}`)}
                     getData={getData.getAllStarships}
-                    selectedPersonId={selectedPersonId}
-                    onPersonClick={onPersonClick}
+                    onPersonalClick={onPersonalClick}
                 />
         )
 
         const details = (
             <PersonalDetails
                         getData={getData.getStarship}
-                        selectedPersonId={selectedPersonId}
+                        selectedPersonalId={selectedPersonalId}
                         getImage={getData.imageStarshipDownloader}
                     />
         )

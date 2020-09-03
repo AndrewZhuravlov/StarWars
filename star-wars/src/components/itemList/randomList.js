@@ -21,13 +21,13 @@ export default class RandomList extends Component {
     }
 
     peopleRender (arr) {
-        return arr.map((item) => {
-          const {renderItems} = this.props;
-          const {id} = item;
+        return arr.map(( item ) => {
+          const { renderItems } = this.props;
+          const { id } = item;
           const label = renderItems(item);  
           return (
-            <li key = {id}
-                onClick = {()=>this.props.onPersonClick(id)}
+            <li key = { id }
+                onClick = {()=>this.props.onPersonalClick(id)}
                 className="list-group-item list-group-item-action ">
                 {label}</li>
           )

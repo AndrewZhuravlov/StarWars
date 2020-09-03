@@ -3,7 +3,7 @@ export default class SwapiServices {
 
     _apiBase = 'https://swapi.dev/api';
     _imgBase = 'https://starwars-visualguide.com/assets/img'
-    getDataFromSwapi= async (url)=> {
+    getDataFromSwapi = async (url)=> {
         try {
             const resolve = await fetch(`${this._apiBase}${url}`);
             return await resolve.json();
@@ -60,10 +60,10 @@ export default class SwapiServices {
         const id = this.idRegExpFinder(planet);
         return {
             id,
-            ['Name']: planet.name,
-            ['Population']: planet.population,
-            ['RotationPeriod']: planet.rotation_period,
-            ['Diameter']: planet.diameter,
+            'Name': planet.name,
+            'Population': planet.population,
+            'RotationPeriod': planet.rotation_period,
+            'Diameter': planet.diameter,
         }
     }
 
@@ -71,10 +71,10 @@ export default class SwapiServices {
 
         return{
             id: this.idRegExpFinder(person),
-            ['Name']: person.name,
-            ['Gender']: person.gender,
-            ['Birth year']: person.birth_year,
-            ['Eye color']: person.eye_color,
+            'Name': person.name,
+            'Gender': person.gender,
+            'Birth year': person.birth_year,
+            'Eye color': person.eye_color,
         }
     }
 
@@ -82,29 +82,37 @@ export default class SwapiServices {
 
         return{
             id: this.idRegExpFinder(starship),
-            ['Name']: starship.name,
-            ['Model']: starship.model,
-            ['Manufacturer']: starship.manufacturer,
-            ['Cost In Credits']: starship.costInCredits,
-            ['Length']: starship.length,
-            ['Passengers']: starship.passengers,
-            ['Cargo Capacity']: starship.cargoCapacity 
+            'Name': starship.name,
+            'Model': starship.model,
+            'Manufacturer': starship.manufacturer,
+            'Cost In Credits': starship.costInCredits,
+            'Length': starship.length,
+            'Passengers': starship.passengers,
+            'Cargo Capacity': starship.cargoCapacity 
         }
     }
 
     imagePersonDownloader =(id) =>{
+       
        return `${this._imgBase}/characters/${id}.jpg`
          
     }
 
     imagePlanetDownloader =(id) =>{
+
+        if(Number(id) === 1 ){
+            return 'https://vignette.wikia.nocookie.net/starwars/images/b/b0/Tatooine_TPM.png/revision/latest?cb=20131019121937'
+        }
         return `${this._imgBase}/planets/${id}.jpg`
          
     }
 
     imageStarshipDownloader =(id) =>{
-        if(id===2){
-            return 'https://lh3.googleusercontent.com/proxy/3X7ow3VSiMjyBRvKHooXiqe46IMYXMPMGeoiTP2npCHOPEaDYxhIXtP5pVHi1pl2nGsDkdt4N4WOuCnFnHiJLB3L56PbGwBMafvDtc0uEsMsyHJALA'
+
+        if(Number(id) === 2){
+            return `https://vignette.wikia.nocookie.net/rustarwars/images/b/b0/Corvette-CHRON.jpg/revision/latest?cb=20131105141107`;
+        }else if(Number(id) === 3){
+            return `https://vignette.wikia.nocookie.net/starwars/images/2/2a/ISD-SWE.png/revision/latest?cb=20140718023302`;
         }
         return `${this._imgBase}/starships/${id}.jpg`
          
