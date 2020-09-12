@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { s } from "./personalDetails.css";
-import SwapiServices from "../../swapiService/swapiService";
 import Spinner from "../../spinner/spinner";
-import ThrowErr from "../../throwErr/throwErr";
 import OnError from "../../onError/onError";
 
 export default class PersonalDetails extends Component {
@@ -12,7 +10,7 @@ export default class PersonalDetails extends Component {
         onError: false,
         loading: true,
         imgUrl: null,
-    }
+    };
 
     componentDidMount() {
 
@@ -24,22 +22,22 @@ export default class PersonalDetails extends Component {
                     item,
                     loading: false,
                     imgUrl: getImage(selectedPersonalId)
-                })
+                });
             })
             .catch(this.onErr);
-    }
+    };
 
     onErr = () => {
         this.setState({
             onError: true,
-        })
-    }
+        });
+    };
     componentDidUpdate(prevProps) {
         if (this.props.selectedPersonalId !== prevProps.selectedPersonalId) {
 
             this.setState({
                 loading: true,
-            })
+            });
             this.componentDidMount();
         }
     }
@@ -48,17 +46,18 @@ export default class PersonalDetails extends Component {
 
         if (loading) {
             return <Spinner />
-        }
-        if (!item || onError) {
+        };
+
+        if (onError) {
             return <OnError />
-        }
+        };
 
         return (
             <PersonDescription imgUrl={imgUrl}
                 item={item} />
         )
-    }
-}
+    };
+};
 
 
 
@@ -90,7 +89,6 @@ class PersonDescription extends Component {
                         <div>
                             {renderItems}
                         </div>
-                        <ThrowErr />
                     </div>
                 </div>
             </div>

@@ -6,7 +6,11 @@ import PersonPage from '../personPage/PersonPage';
 import SwapiServices from '../swapiService/swapiService';
 import PlanetPage from '../planetPage/PlanetPage';
 import StarshipPage from '../starshipPage/starshipPage';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
 export default class App extends Component {
     swapi = new SwapiServices();
@@ -40,27 +44,39 @@ export default class App extends Component {
         const { selectedPersonId, selectedPlanetId,
             selectedStarshipId } = this.state;
         return (
-            <div className="container">
-                <Header />
-                <RandomPlanet />
-                <div className="randomListWrapper">
-                    <PersonPage
-                        getData={this.swapi}
-                        selectedPersonalId={selectedPersonId}
-                        onPersonalClick={this.onPersonClick} />
+            <Router>
+                <div className="container">
+                    <Header />
+                    <RandomPlanet />
+                    <div className="randomListWrapper">
 
-                    <PlanetPage
-                        getData={this.swapi}
-                        selectedPersonalId={selectedPlanetId}
-                        onPersonalClick={this.onPlanetClick}
-                    />
-                    <StarshipPage
-                        getData={this.swapi}
-                        selectedPersonalId={selectedStarshipId}
-                        onPersonalClick={this.onStarshipClick} />
+
+
+                        <Switch>
+                            <Route exact path ='/' >
+                                <PersonPage
+                                    getData={this.swapi}
+                                    selectedPersonalId={selectedPersonId}
+                                    onPersonalClick={this.onPersonClick} />
+                            </Route>
+                            <Route exact path ='/PlanetPage'>
+                                <PlanetPage
+                                    getData={this.swapi}
+                                    selectedPersonalId={selectedPlanetId}
+                                    onPersonalClick={this.onPlanetClick}
+                                />
+                            </Route>
+                            <Route exact path ='/StarshipPage'>
+                                <StarshipPage
+                                    getData={this.swapi}
+                                    selectedPersonalId={selectedStarshipId}
+                                    onPersonalClick={this.onStarshipClick} />
+                            </Route>
+                        </Switch>
+                    </div>
+
                 </div>
-
-            </div>
+            </Router>
         )
     }
 }
