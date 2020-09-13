@@ -8,18 +8,13 @@ import withData from '../HOC-helpers/withData';
 
 
 export default class PersonPage extends Component {
-
     
+    ListOfPeople = withRenderItems( withData(ItemList, this.props.getData.getAllPeople),
+                             (item)=> (`${item.Name} (${item.Gender})`), this.props.onPersonalClick);   
+                            
 
     render() {
-        const {selectedPersonalId, onPersonalClick, getData} = this.props;
-       /*  const itemList = (<ItemList
-            renderItems = { (item)=> (`${item.Name} (${item.Gender})`)}
-            getData = { getAllPeople } 
-            onPersonalClick = { onPersonalClick } />); */
-        const ListOfPeople = withRenderItems( withData(ItemList, getData.getAllPeople),
-                             (item)=> (`${item.Name} (${item.Gender})`), onPersonalClick);   
-                            
+        const {selectedPersonalId, getData} = this.props;
         const personalDetails = ( <PersonalDetails
             getData ={getData.getPerson}
             getImage = {getData.imagePersonDownloader}
@@ -27,7 +22,7 @@ export default class PersonPage extends Component {
       
         return (
         <ErrorBoundary>
-            <Row left={<ListOfPeople/>} 
+            <Row left={<this.ListOfPeople/>} 
              right={personalDetails}/>
         </ErrorBoundary>
         )

@@ -5,12 +5,13 @@ import OnError from '../onError/onError';
 const withData = (WrappedComponent, getData) => {
 
     return class extends Component {
+
         state = {
             itemList: null,
             onError: false,
         }
-        componentDidMount() {
 
+        componentDidMount() {
                 getData()
                 .then(itemList => {
                     this.setState({
@@ -20,12 +21,13 @@ const withData = (WrappedComponent, getData) => {
                 .catch(this.onError)
 
         };
-
+        
         onError = () => {
             this.setState({
                 onError: true,
             })
         };
+
 
         render() {
             const { itemList, onError } = this.state;

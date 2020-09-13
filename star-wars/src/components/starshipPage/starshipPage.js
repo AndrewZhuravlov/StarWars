@@ -3,18 +3,14 @@ import Row from '../Row/Row';
 import ItemList from '../itemList/randomList';
 import PersonalDetails from '../personPage/personalDetailes/personalDetails';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
+import withRenderItems from '../HOC-helpers/withRenderItems';
+import withData from '../HOC-helpers/withData';
 
 export default class StarshipPage extends Component{
-
+    ListOfStarships = withRenderItems( withData(ItemList, this.props.getData.getAllStarships),
+    (item)=> (`${item.Name}`), this.props.onPersonalClick);
     render(){
-        const{getData, selectedPersonalId, onPersonalClick} =this.props;
-        const items = (
-            <ItemList
-                    renderItems = { (item)=> (`${item.Name}`)}
-                    getData={getData.getAllStarships}
-                    onPersonalClick={onPersonalClick}
-                />
-        )
+        const{getData, selectedPersonalId} =this.props;
 
         const details = (
             <PersonalDetails
@@ -25,7 +21,7 @@ export default class StarshipPage extends Component{
         )
         return (
             <ErrorBoundary>
-                 <Row left={items} right={details} />
+                 <Row left={<this.ListOfStarships/>} right={details} />
             </ErrorBoundary>
            
         )

@@ -39,6 +39,7 @@ export default class App extends Component {
         })
     };
 
+    
     render() {
 
         const { selectedPersonId, selectedPlanetId,
@@ -53,13 +54,13 @@ export default class App extends Component {
 
 
                         <Switch>
-                            <Route exact path ='/' >
+                            <Route exact path='/' >
                                 <PersonPage
                                     getData={this.swapi}
                                     selectedPersonalId={selectedPersonId}
                                     onPersonalClick={this.onPersonClick} />
                             </Route>
-                            <Route exact path ='/PlanetPage'>
+                                 <Route exact path ='/PlanetPage'>
                                 <PlanetPage
                                     getData={this.swapi}
                                     selectedPersonalId={selectedPlanetId}
@@ -79,7 +80,5 @@ export default class App extends Component {
             </Router>
         )
     }
-}
-
-
+};
 
