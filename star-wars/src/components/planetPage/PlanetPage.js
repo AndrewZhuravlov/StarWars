@@ -8,23 +8,23 @@ import withRenderItems from '../HOC-helpers/withRenderItems';
 
 export default class PlanetPage extends Component {
 
-    ListOfPlanet = withRenderItems( withData(ItemList, this.props.getData.getAllPlanets),
-                             (item)=> (`${item.Name}`), this.props.onPersonalClick);   
+    ListOfPlanet = withRenderItems(withData(ItemList, this.props.getData.getAllPlanets),
+        (item) => (`${item.Name}`), this.props.onPersonalClick);
     render() {
-        const{getData, selectedPersonalId} =this.props;
+        const { getData, selectedPersonalId } = this.props;
 
         const details = (
             <PersonalDetails
-                        getData={getData.getPlanet}
-                        selectedPersonalId={selectedPersonalId}
-                        getImage={getData.imagePlanetDownloader}
-                    />
+                getData={getData.getPlanet}
+                selectedPersonalId={selectedPersonalId}
+                getImage={getData.imagePlanetDownloader}
+            />
         )
         return (
             <ErrorBoundary>
-                 <Row left={<this.ListOfPlanet/>} right={details} />
+                <Row left={<this.ListOfPlanet />} right={details} />
             </ErrorBoundary>
-           
+
         )
     }
 }

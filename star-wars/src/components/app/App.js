@@ -13,7 +13,9 @@ import {
 } from "react-router-dom";
 
 export default class App extends Component {
+
     swapi = new SwapiServices();
+
     state = {
         selectedPersonId: 1,
         selectedPlanetId: 1,
